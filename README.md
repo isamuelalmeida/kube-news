@@ -16,4 +16,6 @@ kubectl apply -f k8s/deployment.yaml
 
 Abra o navegador de sua preferência e coloque na URL o IP do host que está hospedando a aplicação na porta 30000 => http://seu_ip:30000/
 
-OBS: Caso realize modificações no código fonte da aplicação, realize os passos anteriores modificando a versão da imagem e alterando o arquivo deployment.yaml com a nova versão.
+
+
+#### OBS: Caso realize modificações no código fonte da aplicação, realize os passos anteriores modificando a versão da imagem e alterando o arquivo deployment.yaml com a nova versão.
