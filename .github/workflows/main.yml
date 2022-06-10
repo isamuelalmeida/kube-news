@@ -21,15 +21,16 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+      - name: Adicionado repositório no workspace
+        uses: actions/checkout@v3
       
-      - name: Docker Login
+      - name: Autenticando no DockerHub
         uses: docker/login-action@v2.0.0
         with:
           username: ${{secrets.DOCKERHUB_USER}}
           password: ${{secrets.DOCKERHUB_PWD}}
           
-      - name: Build and push Docker images
+      - name: Construindo a imagem e enviando para o DockerHub
         uses: docker/build-push-action@v3.0.0
         with:
           file: ./src/Dockerfile
@@ -43,14 +44,15 @@ jobs:
     runs-on: ubuntu-latest
     needs: [CI]
     steps:
-      - uses: actions/checkout@v3
+      - name: Adicionado repositório no workspace
+        uses: actions/checkout@v3
       
-      - name: Kubernetes Set Context
+      - name: Definindo o contexto do kubernetes a partir do arquivo kubeconfig
         uses: Azure/k8s-set-context@v2
         with:
           kubeconfig: ${{secrets.K8S_CONFIG}}
           
-      - name: Deploy to Kubernetes cluster
+      - name: Implantação do kubernetes no cluster
         uses: Azure/k8s-deploy@v3.1
         with:
           images: saiwmon/kube-news:${{github.run_number}}
